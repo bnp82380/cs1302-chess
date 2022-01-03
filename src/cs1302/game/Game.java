@@ -7,14 +7,8 @@ import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.event.Event;
-
 import javafx.geometry.Bounds;
 import javafx.geometry.BoundingBox;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
-import javafx.scene.layout.CornerRadii;
-import javafx.geometry.Insets;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -38,15 +32,14 @@ public abstract class Game extends Region {
 
     protected final Logger logger = Logger.getLogger("cs1302.game.Game");
 
-    private final Bounds bounds; //Game bounds
-    private final Duration fpsTarget; //Target duration for game loop
-    private final Timeline loop = new TimeLine(); //Timeline for main game loop
-    private final BitSet keysPressed = new BitSet(); //Set of currently pressed keys
-    private final BackgroundFill fill; //Background fill for region
-    private final Background bg; //Background for region
-    private boolean initialized = false; //play() has been called
+    private final Bounds bounds;                     // game bounds
+    private final Duration fpsTarget;                // target duration for game loop
+    private final Timeline loop = new Timeline();    // timeline for main game loop
+    private final BitSet keysPressed = new BitSet(); // set of currently pressed keys
 
-       /**
+    private boolean initialized = false;             // play() has been called?
+
+    /**
      * Construct a {@code Game} object.
      * @param width minimum game region width
      * @param height minimum game region height
@@ -54,23 +47,13 @@ public abstract class Game extends Region {
      */
     public Game(int width, int height, int fps) {
         super();
-
-        //Sets game bounds
         setMinWidth(width);
         setMinHeight(height);
         this.bounds = new BoundingBox(0, 0, width, height);
-
-        //Sets default background
-        this.fill = new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY);
-        this.bg = new Background(fill);
-        setBackground(bg);
-
-        //Initializes game loop
         this.fpsTarget = Duration.millis(1000.0 / fps);
         addEventFilter(KeyEvent.KEY_PRESSED, event -> handleKeyPressed(event));
         addEventFilter(KeyEvent.KEY_RELEASED, event -> handleKeyReleased(event));
         initGameLoop();
-
     } // Game
 
     /**
@@ -182,4 +165,4 @@ public abstract class Game extends Region {
         return bounds;
     } // getGameBounds
 
-} //Game
+} // Game
