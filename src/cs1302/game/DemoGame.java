@@ -43,7 +43,7 @@ public class DemoGame extends Game {
         // setup the cat
         cat.setX(0);
         cat.setY(0);
-    } // init
+     } // init
 
     /** {@inheritDoc} */
     @Override
